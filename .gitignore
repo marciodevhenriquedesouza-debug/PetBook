@@ -1,0 +1,11 @@
+# Ignora a pasta de dependências do Node (ESSENCIAL)
+node_modules/
+dist/
+
+# Ignora arquivos de variáveis de ambiente (onde ficam senhas e chaves de API)
+.env
+.env.local
+
+# Ignora arquivos do sistema operacional
+.DS_Store
+Thumbs.db
