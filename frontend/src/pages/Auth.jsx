@@ -12,14 +12,14 @@ export default function Auth() {
     setTimeout(() => {
       setModo(novoModo)
       setAnimando(false)
-    }, 500)
+    }, 4000)
   }
 
   const isLogin = modo === "login"
 
   return (
     <div className="auth-page">
-      <div className={`auth-card ${animando ? "animando" : ""} ${isLogin ? "modo-login" : "modo-register"}`}>
+      <div className={`auth-card ${isLogin ? "modo-login" : "modo-register"}`}>
 
         {/* PAINEL FORMULÁRIO */}
         <div className="painel-form">
@@ -29,25 +29,25 @@ export default function Auth() {
             {!isLogin && (
               <div className="campo">
                 <input type="text" placeholder="Nome completo" />
-                <span className="icon">👤</span>
+                
               </div>
             )}
 
             <div className="campo">
               <input type="email" placeholder="E-mail" />
-              <span className="icon">✉</span>
+              
             </div>
 
             {!isLogin && (
               <div className="campo">
                 <input type="number" placeholder="Idade" />
-                <span className="icon">#</span>
+                
               </div>
             )}
 
             <div className="campo">
               <input type="password" placeholder="Senha" />
-              <span className="icon">🔒</span>
+              
             </div>
 
             <button className="btn-main">
@@ -64,10 +64,10 @@ export default function Auth() {
         </div>
 
         {/* PAINEL COLORIDO */}
-        <div className="painel-color">
+        <div className={`painel-color ${animando ? "animando" : ""}`}>
           <div className="painel-color-inner">
             <div className="paw-icon">
-              <img src="/logo.png" alt="PetBook logo" style={{ width: '52px', height: '52px' }} />
+              <img src="/logo.png" alt="PetBook logo"  />
             </div>
             <h2>{isLogin ? "Olá,\nBem-vindo!" : "Bem-vindo\nde volta!"}</h2>
             <p>
@@ -77,7 +77,7 @@ export default function Auth() {
             </p>
             <button className="btn-outline" onClick={() => trocar(isLogin ? "register" : "login")}>
               {isLogin ? "Criar conta" : "Entrar"}
-            </button>
+            </button> 
           </div>
         </div>
 

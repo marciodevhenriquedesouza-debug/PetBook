@@ -10,7 +10,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: 'Segoe UI', sans-serif;
+  font-family: "Segoe UI", sans-serif;
 }
 
 .auth-card {
@@ -20,66 +20,131 @@
   min-height: 560px;
   border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 0 0 1px rgba(26,155,130,0.3), 0 0 60px rgba(26,155,130,0.12);
+  box-shadow:
+    0 0 0 2px rgba(55, 218, 185, 0.8),
+    0 0 60px rgba(82, 226, 197, 0.35);
   position: relative;
 }
-
-/* ANIMAÇÃO FLIP */
-.auth-card.animando {
-  animation: flip-card 0.5s ease-in-out;
+.modo-login .painel-color.animando {
+  animation: slide_login 4s ease-in-out forwards;
 }
 
-@keyframes flip-card {
-  0%   { transform: perspective(1400px) rotateY(0deg); }
-  50%  { transform: perspective(1400px) rotateY(90deg); }
-  100% { transform: perspective(1400px) rotateY(0deg); }
+.modo-register .painel-color.animando {
+  animation: slide_register 4s ease-in-out forwards;
+}
+
+.modo-login.animando h1 {
+  animation: saindo_esq 1s ease-in-out 0.5s forwards;
+}
+
+@keyframes saindo_esq {
+
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+   100% {
+    transform: translateX(-100vw);
+    opacity: 0;
+  }
+}
+
+@keyframes slide_login {
+
+  0% {
+    clip-path: polygon(40% 0%, 100% 0%, 100% 100%, 0% 100%);
+    opacity: 1;
+  }
+
+  100% {
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 40% 100%);
+    opacity: 0;
+  }
+}
+
+@keyframes slide_register {
+  0% {
+    clip-path: polygon(0% 0%, 60% 0%, 100% 100%, 0% 100%);
+    opacity: 1;
+  }
+  100% {
+    clip-path: polygon(0% 0%, 100% 0%, 60% 100%, 0% 100%);
+    opacity: 0;
+  }
 }
 
 /* ORDEM */
-.modo-login    .painel-form  { order: 1; }
-.modo-login    .painel-color { order: 2; }
-.modo-register .painel-color { order: 1; }
-.modo-register .painel-form  { order: 2; }
+.modo-login .painel-form {
+  order: 1;
+}
+.modo-login .painel-color {
+  order: 2;
+}
+.modo-register .painel-color {
+  order: 1;
+}
+.modo-register .painel-form {
+  order: 2;
+}
 
 /* PAINEL COLORIDO — corte diagonal via clip-path */
-.painel-color {
-  flex: 1.1;
+.modo-register .painel-color {
+  flex: 1.5;
   background: linear-gradient(145deg, #1db896 0%, #0f7a65 50%, #0a5548 100%);
   display: flex;
   align-items: center;
-  justify-content: center;
-  padding: 3rem 3rem 3rem 2.5rem;
+  justify-content: start;
+  padding: 3rem 0rem 3rem 8rem;
   position: relative;
   overflow: hidden;
-}
-
-/* diagonal no lado que encosta no form */
-.modo-login .painel-color {
-  clip-path: polygon(8% 0%, 100% 0%, 100% 100%, 0% 100%);
-  padding-left: 4rem;
-}
-
-.modo-register .painel-color {
-  clip-path: polygon(0% 0%, 92% 0%, 100% 100%, 0% 100%);
+  clip-path: polygon(0% 0%, 60% 0%, 100% 100%, 0% 100%);
   padding-right: 4rem;
 }
 
+.modo-login .painel-color {
+  flex: 1.5;
+  background: linear-gradient(145deg, #1db896 0%, #0f7a65 50%, #0a5548 100%);
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  padding: 3rem 8rem 3rem 8rem;
+  position: relative;
+  overflow: hidden;
+  clip-path: polygon(40% 0%, 100% 0%, 100% 100%, 0% 100%);
+  padding-left: 4rem;
+}
+
+/* diagonal no lado que encosta no form */
+/* .modo-login .painel-color {
+  clip-path: polygon(40% 0%, 100% 0%, 100% 100%, 0% 100%);
+  padding-left: 4rem;
+} */
+
+/* .modo-register .painel-color {
+  clip-path: polygon(0% 0%, 70% 0%, 100% 100%, 0% 100%);
+  padding-right: 4rem;
+} */
+
 .painel-color::before {
-  content: '';
+  content: "";
   position: absolute;
-  top: -80px; right: -80px;
-  width: 260px; height: 260px;
+  top: -80px;
+  right: -80px;
+  width: 260px;
+  height: 260px;
   border-radius: 50%;
-  background: rgba(255,255,255,0.06);
+  background: rgba(255, 255, 255, 0.06);
 }
 
 .painel-color::after {
-  content: '';
+  content: "";
   position: absolute;
-  bottom: -60px; left: -60px;
-  width: 200px; height: 200px;
+  bottom: -60px;
+  left: -60px;
+  width: 200px;
+  height: 200px;
   border-radius: 50%;
-  background: rgba(255,255,255,0.04);
+  background: rgba(255, 255, 255, 0.04);
 }
 
 .painel-color-inner {
@@ -89,20 +154,20 @@
 
 /* LOGO PATINHA */
 .paw-icon {
-  width: 80px;
-  height: 80px;
-  background: rgba(255,255,255,0.15);
+  width: 150px;
+  height: 150px;
+  background: rgba(8, 8, 8, 0.2);
   border-radius: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 0 auto 1.5rem;
-  border: 1.5px solid rgba(255,255,255,0.25);
+  border: 1.5px solid rgba(83, 80, 80, 0.25);
 }
 
-.paw-icon svg {
-  width: 52px;
-  height: 52px;
+.paw-icon img {
+  width: 200px;
+  height: 200px;
 }
 
 .painel-color-inner h2 {
@@ -116,7 +181,7 @@
 
 .painel-color-inner p {
   font-size: 14px;
-  color: rgba(255,255,255,0.75);
+  color: rgba(255, 255, 255, 0.75);
   line-height: 1.8;
   margin-bottom: 2.2rem;
   max-width: 260px;
@@ -126,7 +191,7 @@
 
 .btn-outline {
   padding: 11px 36px;
-  border: 2px solid rgba(255,255,255,0.85);
+  border: 2px solid rgba(255, 255, 255, 0.85);
   border-radius: 99px;
   background: transparent;
   color: #fff;
@@ -138,16 +203,15 @@
 }
 
 .btn-outline:hover {
-  background: rgba(255,255,255,0.15);
+  background: rgba(255, 255, 255, 0.15);
 }
 
 /* PAINEL FORMULÁRIO */
 .painel-form {
   flex: 1;
-  background: #161b22;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: end;
   padding: 3rem 2.5rem;
 }
 
@@ -174,22 +238,24 @@
   width: 100%;
   padding: 12px 44px 12px 16px;
   background: #0d1117;
-  border: 1px solid rgba(26,155,130,0.3);
-  border-bottom: 2px solid rgba(26,155,130,0.5);
+  border: 1px solid rgba(26, 155, 130, 0.3);
+  border-bottom: 2px solid rgba(26, 155, 130, 0.5);
   border-radius: 0;
   color: #fff;
   font-size: 14px;
   outline: none;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
   border-top: none;
   border-left: none;
   border-right: none;
   background: transparent;
-  border-bottom: 1.5px solid rgba(255,255,255,0.2);
+  border-bottom: 1.5px solid rgba(255, 255, 255, 0.2);
 }
 
 .campo input::placeholder {
-  color: rgba(255,255,255,0.35);
+  color: rgba(255, 255, 255, 0.35);
 }
 
 .campo input:focus {
@@ -220,16 +286,22 @@
   margin-top: 10px;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  transition: opacity 0.2s, transform 0.1s;
+  transition:
+    opacity 0.2s,
+    transform 0.1s;
 }
 
-.btn-main:hover  { opacity: 0.88; }
-.btn-main:active { transform: scale(0.98); }
+.btn-main:hover {
+  opacity: 0.88;
+}
+.btn-main:active {
+  transform: scale(0.98);
+}
 
 .switch-text {
   text-align: center;
   font-size: 13px;
-  color: rgba(255,255,255,0.35);
+  color: rgba(255, 255, 255, 0.35);
   margin-top: 18px;
 }
 
@@ -239,4 +311,6 @@
   font-weight: 600;
 }
 
-.switch-text span:hover { text-decoration: underline; }
+.switch-text span:hover {
+  text-decoration: underline;
+}
