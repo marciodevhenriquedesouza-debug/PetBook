@@ -26,31 +26,27 @@
   position: relative;
 }
 .modo-login .painel-color.animando {
-  animation: slide_login 4s ease-in-out forwards;
+  animation:
+    slide_login 3s ease-in-out forwards,
+    opac 2s ease-in-out 3s;
 }
 
 .modo-register .painel-color.animando {
-  animation: slide_register 4s ease-in-out forwards;
+  animation:
+    slide_register 3s ease-in-out forwards,
+    opac 2s ease-in-out 3s;
 }
 
-.modo-login.animando h1 {
-  animation: saindo_esq 1s ease-in-out 0.5s forwards;
-}
-
-@keyframes saindo_esq {
-
-  0% {
-    transform: translateX(0);
-    opacity: 1;
-  }
-   100% {
-    transform: translateX(-100vw);
+@keyframes opac {
+  from {
     opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
 
 @keyframes slide_login {
-
   0% {
     clip-path: polygon(40% 0%, 100% 0%, 100% 100%, 0% 100%);
     opacity: 1;
@@ -88,7 +84,7 @@
 }
 
 /* PAINEL COLORIDO — corte diagonal via clip-path */
-.modo-register .painel-color {
+.painel-color {
   flex: 1.5;
   background: linear-gradient(145deg, #1db896 0%, #0f7a65 50%, #0a5548 100%);
   display: flex;
@@ -99,6 +95,32 @@
   overflow: hidden;
   clip-path: polygon(0% 0%, 60% 0%, 100% 100%, 0% 100%);
   padding-right: 4rem;
+}
+.modo-login .painel-color {
+  animation: dash1 0.5s ease-out;
+}
+@keyframes dash1 {
+  from {
+    transform: translateX(350px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+.modo-register .painel-color {
+  animation: dash2 0.5s ease-out;
+}
+@keyframes dash2 {
+  from {
+    transform: translateX(-350px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 
 .modo-login .painel-color {
@@ -113,17 +135,6 @@
   clip-path: polygon(40% 0%, 100% 0%, 100% 100%, 0% 100%);
   padding-left: 4rem;
 }
-
-/* diagonal no lado que encosta no form */
-/* .modo-login .painel-color {
-  clip-path: polygon(40% 0%, 100% 0%, 100% 100%, 0% 100%);
-  padding-left: 4rem;
-} */
-
-/* .modo-register .painel-color {
-  clip-path: polygon(0% 0%, 70% 0%, 100% 100%, 0% 100%);
-  padding-right: 4rem;
-} */
 
 .painel-color::before {
   content: "";
@@ -313,4 +324,65 @@
 
 .switch-text span:hover {
   text-decoration: underline;
+}
+
+/* SAÍDA DOS TEXTOS */
+.modo-login .painel-form.saindo {
+  animation: sai-esquerda 0.8s ease-out forwards;
+}
+
+.modo-login .painel-color-inner.saindo {
+  animation: sai-direita 0.8s ease-out forwards;
+}
+
+@keyframes sai-esquerda {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(-250px);
+    opacity: 0;
+  }
+}
+
+@keyframes sai-direita {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(250px);
+    opacity: 0;
+  }
+}
+
+/* ENTRADA DOS TEXTOS */
+.modo-register .painel-form.saindo {
+  animation: entra-esquerda 0.8s ease-out forwards;
+}
+
+.modo-register .painel-color-inner.saindo {
+  animation: entra-direita 0.8s ease-out forwards;
+}
+@keyframes entra-esquerda {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(250px);
+    opacity: 0;
+  }
+}
+
+@keyframes entra-direita {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(-250px);
+    opacity: 0;
+  }
 }
