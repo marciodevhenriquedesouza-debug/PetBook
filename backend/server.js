@@ -3,6 +3,8 @@ const express = require('express')
 const pool = require('./db/index')  // importa a conexão com o banco
 // importa o middleware no topo do server.js
 const autenticar = require('./middleware/auth')
+const cors = require('cors')
+app.use(cors())
 
 const app = express()
 app.use(express.json())

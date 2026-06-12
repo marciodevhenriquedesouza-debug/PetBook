@@ -273,16 +273,6 @@
   border-bottom-color: #1db896;
 }
 
-.icon {
-  position: absolute;
-  right: 4px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 15px;
-  opacity: 0.35;
-  pointer-events: none;
-}
-
 /* BOTÃO */
 .btn-main {
   width: 100%;
