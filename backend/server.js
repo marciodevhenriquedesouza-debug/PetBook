@@ -1,13 +1,13 @@
 require('dotenv').config()
 const express = require('express')
-const pool = require('./db/index')  // importa a conexão com o banco
-// importa o middleware no topo do server.js
-const autenticar = require('./middleware/auth')
 const cors = require('cors')
-app.use(cors())
+const pool = require('./db/index')
+const autenticar = require('./middleware/auth')
 
 const app = express()
+app.use(cors())
 app.use(express.json())
+
 const authRoutes = require('./routes/auth')
 app.use('/auth', authRoutes)
 
