@@ -386,7 +386,6 @@ function Composer({ usuario }) {
       <div className="composer-actions">
         <button type="button"><Icon name="image" />Foto</button>
         <button type="button"><Icon name="video" />Vídeo</button>
-        <button type="button"><Icon name="poll" />Enquete</button>
         <button type="button"><Icon name="pin" />Local</button>
       </div>
     </section>
