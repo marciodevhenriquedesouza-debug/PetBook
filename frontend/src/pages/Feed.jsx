@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+﻿import { useState, useEffect, useRef } from "react";
 import "./Feed.css";
 
 const iconProps = {
@@ -87,18 +87,18 @@ function Icon({ name }) {
   return icons[name] ?? null;
 }
 
-/* ── DATA ────────────────────────────────────────────────────────── */
+/* â”€â”€ DATA â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 const stories = [
   {
     title: "PetLovers",
-    subtitle: "Passeio no parque 🌿",
+    subtitle: "Passeio no parque ðŸŒ¿",
     image: "https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=640&q=80",
     accent: "coral",
     cuteness: 76,
   },
   {
     title: "Mia & Cia",
-    subtitle: "Story do momento ✨",
+    subtitle: "Story do momento âœ¨",
     image: "https://images.unsplash.com/photo-1574158622682-e40e69881006?auto=format&fit=crop&w=640&q=80",
     accent: "teal",
     featured: true,
@@ -106,21 +106,21 @@ const stories = [
   },
   {
     title: "VetCare",
-    subtitle: "Dicas de saúde 🩺",
+    subtitle: "Dicas de saÃºde ðŸ©º",
     image: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=640&q=80",
     accent: "coral",
     cuteness: 68,
   },
   {
     title: "Adote Amor",
-    subtitle: "Aumigos da rua 🐾",
+    subtitle: "Aumigos da rua ðŸ¾",
     image: "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=640&q=80",
     accent: "teal",
     cuteness: 88,
   },
   {
     title: "Clube Felino",
-    subtitle: "Gatos em alta 🐱",
+    subtitle: "Gatos em alta ðŸ±",
     image: "https://images.unsplash.com/photo-1518791841217-8f162f1e1131?auto=format&fit=crop&w=640&q=80",
     accent: "coral",
     cuteness: 82,
@@ -138,8 +138,8 @@ const posts = [
   {
     author: "Ana e Luna",
     avatar: "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=160&q=80",
-    time: "há 2h",
-    text: "Passeio no parque e muita diversão! 🐾\nA vida é melhor com nossos melhores amigos!",
+    time: "hÃ¡ 2h",
+    text: "Passeio no parque e muita diversÃ£o! ðŸ¾\nA vida Ã© melhor com nossos melhores amigos!",
     media: "https://images.unsplash.com/photo-1601758125946-6ec2ef64daf8?auto=format&fit=crop&w=1200&q=85",
     type: "image",
     badge: "1/5",
@@ -151,8 +151,8 @@ const posts = [
     author: "VetCare Oficial",
     verified: true,
     avatar: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=160&q=80",
-    time: "há 5h",
-    text: "Dicas importantes para cuidar da saúde do seu pet! 🩺💙",
+    time: "hÃ¡ 5h",
+    text: "Dicas importantes para cuidar da saÃºde do seu pet! ðŸ©ºðŸ’™",
     media: "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=1200&q=85",
     type: "video",
     reactions: 256,
@@ -162,7 +162,7 @@ const posts = [
   {
     author: "PetLovers Brasil",
     avatar: null,
-    time: "há 1d",
+    time: "hÃ¡ 1d",
     text: "",
     type: "quote",
     reactions: 89,
@@ -171,7 +171,7 @@ const posts = [
   },
 ];
 
-/* ── SIDEBAR ─────────────────────────────────────────────────────── */
+/* â”€â”€ SIDEBAR â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 function Sidebar() {
   return (
     <aside className="feed-sidebar">
@@ -195,15 +195,15 @@ function Sidebar() {
         </button>
       </div>
 
-      <nav className="feed-nav" aria-label="Navegação principal">
-        <a className="active" href="#inicio"><Icon name="home" />Início</a>
+      <nav className="feed-nav" aria-label="NavegaÃ§Ã£o principal">
+        <a className="active" href="#inicio"><Icon name="home" />InÃ­cio</a>
         <a href="#favoritos"><Icon name="star" />Favoritos</a>
         <a href="#comunidades"><Icon name="users" />Comunidades</a>
-        <a href="#notificacoes"><Icon name="bell" />Notificações</a>
+        <a href="#notificacoes"><Icon name="bell" />NotificaÃ§Ãµes</a>
       </nav>
 
-      <section className="suggestions" aria-label="Sugestões">
-        <h2>Sugestões para você</h2>
+      <section className="suggestions" aria-label="SugestÃµes">
+        <h2>SugestÃµes para vocÃª</h2>
         {suggestions.map(([name, handle, avatar]) => (
           <article className="suggestion" key={handle}>
             <img src={avatar} alt="" />
@@ -215,14 +215,14 @@ function Sidebar() {
           </article>
         ))}
         <button className="see-all" type="button">
-          Ver todas as sugestões
+          Ver todas as sugestÃµes
         </button>
       </section>
     </aside>
   );
 }
 
-/* ── STORIES ─────────────────────────────────────────────────────── */
+/* â”€â”€ STORIES â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 function Stories() {
   const [activeStory, setActiveStory] = useState(1);
   const [direction, setDirection] = useState(null); // 'left' | 'right'
@@ -266,7 +266,7 @@ function Stories() {
         aria-label="Story anterior"
         onClick={() => navigate(-1)}
       >
-        ‹
+        â€¹
       </button>
 
       <div className="stories-track">
@@ -292,7 +292,7 @@ function Stories() {
               {isActive && (
                 <div className="cuteness-panel">
                   <div className="cuteness-copy">
-                    <span>🐾 Fofurômetro</span>
+                    <span>ðŸ¾ FofurÃ´metro</span>
                     <strong>{cuteness}%</strong>
                   </div>
                   <label className="cuteness-slider">
@@ -312,7 +312,7 @@ function Stories() {
                   </label>
                   <div className="cuteness-scale">
                     <span>fofo</span>
-                    <span>irresistível ✨</span>
+                    <span>irresistÃ­vel âœ¨</span>
                   </div>
                 </div>
               )}
@@ -360,16 +360,16 @@ function Stories() {
       <button
         className="story-arrow story-arrow-right"
         type="button"
-        aria-label="Próximo story"
+        aria-label="PrÃ³ximo story"
         onClick={() => navigate(1)}
       >
-        ›
+        â€º
       </button>
     </section>
   );
 }
 
-/* ── COMPOSER ────────────────────────────────────────────────────── */
+/* â”€â”€ COMPOSER â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 function Composer({ usuario }) {
   return (
     <section className="composer">
@@ -379,119 +379,188 @@ function Composer({ usuario }) {
           alt=""
         />
         <button type="button">
-          No que você está pensando
+          No que vocÃª estÃ¡ pensando
           {usuario?.nome ? `, ${usuario.nome.split(" ")[0]}` : ""}?
         </button>
       </div>
       <div className="composer-actions">
         <button type="button"><Icon name="image" />Foto</button>
-        <button type="button"><Icon name="video" />Vídeo</button>
+        <button type="button"><Icon name="video" />VÃ­deo</button>
         <button type="button"><Icon name="pin" />Local</button>
       </div>
     </section>
   );
 }
 
-/* ── POST ────────────────────────────────────────────────────────── */
+/* â”€â”€ POST â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 function Post({ post }) {
-  const [liked, setLiked] = useState(false);
-  const [reactionCount, setReactionCount] = useState(post.reactions);
+  const [reactions, setReactions] = useState({
+    amei: Math.max(18, Math.round(post.reactions * 0.38)),
+    top: Math.max(12, Math.round(post.reactions * 0.25)),
+    meh: Math.max(1, Math.round(post.reactions * 0.03)),
+    ruim: 1,
+  });
 
-  function toggleLike() {
-    setLiked((v) => !v);
-    setReactionCount((n) => liked ? n - 1 : n + 1);
+  const totalReactions = Object.values(reactions).reduce((total, value) => total + value, 0);
+  const popularity = Math.min(
+    99,
+    Math.round(((reactions.amei * 1.15 + reactions.top * 0.85 - reactions.ruim * 2) / Math.max(1, totalReactions)) * 100),
+  );
+  const weeklyValues = [35, 48, 42, 61, 55, 69, popularity];
+  const reactionOptions = [
+    ["amei", "\u2764\uFE0F", "Amei"],
+    ["top", "\uD83D\uDC4F", "Top"],
+    ["meh", "\uD83D\uDE42", "Meh"],
+    ["ruim", "\uD83D\uDE3F", "Ruim"],
+  ];
+
+  function addReaction(key) {
+    setReactions((current) => ({
+      ...current,
+      [key]: current[key] + 1,
+    }));
   }
 
   return (
     <article className="post-card">
-      <header className="post-header">
-        {post.avatar ? (
-          <img className="post-avatar" src={post.avatar} alt="" />
-        ) : (
-          <span className="post-avatar brand-avatar">
-            <Icon name="paw" />
-          </span>
-        )}
-        <div>
-          <h2>
-            {post.author}
-            {post.verified && <span className="verified">✓</span>}
-          </h2>
-          <p>{post.time} · 🌐</p>
-        </div>
-        <button className="icon-button" type="button" aria-label="Mais opções">
-          <Icon name="dots" />
-        </button>
-      </header>
-
-      {post.text && <p className="post-text">{post.text}</p>}
-
-      {post.type === "quote" ? (
-        <div className="quote-media">
-          <span>
-            "Um pet não é apenas
-            <br />
-            um animal, é família!"
-          </span>
-          <b>♥</b>
-        </div>
-      ) : (
-        <div className={`post-media ${post.type}`}>
-          <img src={post.media} alt="" />
-          {post.badge && <span className="media-badge">{post.badge}</span>}
-          {post.type === "video" && (
-            <>
-              <button className="play-button" type="button" aria-label="Reproduzir vídeo">
-                <Icon name="play" />
-              </button>
-              <div className="video-controls">
-                <span>▶</span>
-                <span>0:03 / 1:20</span>
-                <i />
-                <span>▰</span>
-                <span>▣</span>
-                <span>⛶</span>
-              </div>
-            </>
+      <section className="post-main">
+        <header className="post-header">
+          {post.avatar ? (
+            <img className="post-avatar" src={post.avatar} alt="" />
+          ) : (
+            <span className="post-avatar brand-avatar">
+              <Icon name="paw" />
+            </span>
           )}
-        </div>
-      )}
-
-      <footer className="post-footer">
-        <div className="post-meta">
-          <span className="reactions">
-            <i>👍</i><i>💜</i><i>❤️</i>
-            {reactionCount}
-          </span>
-          <span>{post.comments} comentários</span>
-          <span>{post.shares} compart.</span>
-        </div>
-        <div className="post-actions">
-          <button
-            className={liked ? "liked" : ""}
-            type="button"
-            onClick={toggleLike}
-            style={{ fontWeight: liked ? 700 : undefined }}
-          >
-            <Icon name="heart" />
-            {liked ? "Curtido" : "Curtir"}
+          <div>
+            <h2>
+              {post.author}
+              {(post.verified || post.author === "Ana e Luna") && <span className="verified">✓</span>}
+            </h2>
+            <p>{post.time} · publico</p>
+          </div>
+          <button className="post-more" type="button" aria-label="Mais opcoes">
+            <Icon name="dots" />
           </button>
-          <button type="button"><Icon name="comment" />Comentar</button>
-          <button type="button"><Icon name="share" />Compartilhar</button>
-          <button type="button" aria-label="Salvar"><Icon name="bookmark" /></button>
+        </header>
+
+        {post.text && <p className="post-text">{post.text}</p>}
+
+        {post.type === "quote" ? (
+          <div className="quote-media">
+            <span>
+              "Um pet nao e apenas
+              <br />
+              um animal, e familia!"
+            </span>
+            <b>♥</b>
+          </div>
+        ) : (
+          <figure className={`post-media ${post.type}`}>
+            <img src={post.media} alt="" />
+            {post.badge && <span className="media-badge">{post.badge}</span>}
+            <figcaption className="media-caption">
+              <span />
+              momento em destaque
+            </figcaption>
+            {post.type === "video" && (
+              <>
+                <button className="play-button" type="button" aria-label="Reproduzir video">
+                  <Icon name="play" />
+                </button>
+                <div className="video-controls">
+                  <span>▶</span>
+                  <span>0:03 / 1:20</span>
+                  <i />
+                  <span>▰</span>
+                  <span>▣</span>
+                  <span>⛶</span>
+                </div>
+              </>
+            )}
+          </figure>
+        )}
+
+        <form className="comment-row">
+          <input type="text" placeholder="Escreva um comentario..." />
+          <button type="button">Enviar</button>
+        </form>
+      </section>
+
+      <aside className="post-insights" aria-label="Reacoes e estatisticas do post">
+        <p className="section-title">Reagir ao post</p>
+
+        <div className="reaction-grid">
+          {reactionOptions.map(([key, emoji, label]) => (
+            <button
+              className={`reaction ${key === "amei" ? "hot" : ""}`}
+              type="button"
+              key={key}
+              onClick={() => addReaction(key)}
+            >
+              <b>{emoji}</b>
+              <span>{label}</span>
+              <strong>{reactions[key]}</strong>
+            </button>
+          ))}
         </div>
-      </footer>
+
+        <section className="popularity-card">
+          <div className="popularity-head">
+            <h3>Popularidade</h3>
+            <div className="score">
+              {popularity}
+              <span>/100</span>
+            </div>
+          </div>
+          <div className="meter">
+            <span className="meter-face">{"\uD83D\uDE0D"}</span>
+          </div>
+          <div className="meter-labels">
+            <span>Timido</span>
+            <span>Bombando</span>
+            <span>Arrasou!</span>
+          </div>
+        </section>
+
+        <section className="week-card">
+          <div className="week-head">
+            <strong>Engajamento semanal</strong>
+            <span>+24%</span>
+          </div>
+          <div className="bars" aria-hidden="true">
+            {weeklyValues.map((value, index) => (
+              <span className={`bar ${index === weeklyValues.length - 1 ? "today" : ""}`} key={`${post.author}-${index}`}>
+                <span>{value}</span>
+                <i style={{ height: `${Math.max(22, value)}%` }} />
+                <span>{["Seg", "Ter", "Qua", "Qui", "Sex", "Sab", "Hoje"][index]}</span>
+              </span>
+            ))}
+          </div>
+        </section>
+
+        <div className="side-actions">
+          <button className="side-action primary" type="button">
+            <Icon name="share" />
+            Compartilhar
+          </button>
+          <button className="side-action" type="button">
+            <Icon name="bookmark" />
+            Favoritar
+          </button>
+        </div>
+      </aside>
     </article>
   );
 }
 
-/* ── TOPBAR ──────────────────────────────────────────────────────── */
+/* â”€â”€ TOPBAR â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 function Topbar() {
   return (
     <header className="topbar">
       <img className="logoTopbar" src="/logo2.png" alt="PetBook" />
       <div />
-      <button className="icon-button" type="button" aria-label="Notificações">
+      <button className="icon-button" type="button" aria-label="NotificaÃ§Ãµes">
         <Icon name="bell" />
       </button>
       <button className="icon-button" type="button" aria-label="Mensagens">
@@ -502,13 +571,13 @@ function Topbar() {
           src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=120&q=80"
           alt=""
         />
-        <span>⌄</span>
+        <span>âŒ„</span>
       </button>
     </header>
   );
 }
 
-/* ── ROOT ────────────────────────────────────────────────────────── */
+/* â”€â”€ ROOT â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 export default function Feed() {
   let usuario = null;
   try { usuario = JSON.parse(localStorage.getItem("usuario")); } catch {}
@@ -520,7 +589,7 @@ export default function Feed() {
         <Topbar />
         <Stories />
         <Composer usuario={usuario} />
-        <section className="posts" aria-label="Publicações">
+        <section className="posts" aria-label="PublicaÃ§Ãµes">
           {posts.map((post) => (
             <Post post={post} key={post.author} />
           ))}
