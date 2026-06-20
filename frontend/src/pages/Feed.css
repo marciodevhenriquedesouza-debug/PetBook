@@ -777,6 +777,12 @@
   gap: 30px;
   margin-bottom: 14px;
 }
+.composer-top input:focus {
+  outline: none;
+  border-color: var(--lilac-400);
+  box-shadow: 0 0 0 3px rgba(138, 95, 232, 0.23);
+  background: #fff;
+}
 
 .composer-top img {
   width: 54px;
@@ -1443,7 +1449,6 @@
   position: relative;
   z-index: 2;
   border-radius: 10px;
-  margin-top: 12px;
   padding: 10px;
   background: rgba(175, 163, 163, 0.32);
 }
@@ -1478,7 +1483,7 @@
   display: grid;
   text-align: center;
   grid-template-rows: auto auto  minmax(0, 1fr) auto;
-  gap: 14px;
+  gap: 8px;
   align-content: start;
   min-height: 0;
   padding: 20px 18px;
@@ -1612,6 +1617,7 @@
 .bar.today i {
   background: linear-gradient(180deg, #4ecdc4, var(--green-500));
 }
+
 
 .side-action {
   padding: 3px;

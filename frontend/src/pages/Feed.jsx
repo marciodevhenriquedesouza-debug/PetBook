@@ -591,11 +591,11 @@ function Post({ post }) {
 
             <figcaption className="media-caption">
               <button className="side-action primary" type="button">
-                Comp
+                
                 <Icon name="share" />
               </button>
               <button className="side-action" type="button">
-                Fav
+                
                 <Icon name="bookmark" />
               </button>
             </figcaption>

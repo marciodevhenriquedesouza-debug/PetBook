@@ -83,7 +83,7 @@ export default function PopularityCard({ popularity = 0 }) {
 
       <div className="gauge-wrap">
         <svg
-          viewBox="-5 0 270 185"
+          viewBox=" -20 10 270 185"
           preserveAspectRatio="xMidYMid meet"
           xmlns="http://www.w3.org/2000/svg"
           aria-label={`Popularidade: ${v} de 100`}
