@@ -282,6 +282,7 @@
 .profile-button img {
   border-radius: 10px;
   object-fit: cover;
+  cursor: pointer;
 }
 
 .suggestion img {
@@ -354,7 +355,7 @@
 .topbar {
   display: grid;
   justify-items: center;
-  grid-template-columns: 1fr auto auto auto auto;
+  grid-template-columns: 1fr auto auto;
   align-items: center;
   gap: 16px;
   min-height: 56px;

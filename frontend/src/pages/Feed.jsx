@@ -1,6 +1,14 @@
 ﻿import { useState, useEffect, useRef } from "react";
 import "./Feed.css";
 import PopularityCard from "./PopularityCard";
+import CreatePostModal from "./CreatePostModal";
+import CreateStoryModal from "./CreateStoryModal";
+import CreateMessageModal from "./messageUser";
+import CreateMenuModal from "./menuSusp";
+import CreateNotificationModal from "./myNotification";
+import CreateMessagesModal from "./myMessages";
+import CreateFavoritosModal from "./myFavoritos";
+import AnunciosGrid from "../components/AnunciosGrid"
 
 const iconProps = {
   width: 24,
@@ -168,8 +176,7 @@ const stories = [
   {
     title: "VetCare",
     subtitle: "Dicas de saúde 🩺",
-    image:
-      "https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=640&q=80",
+    image: "/dogLeco.jpeg",
     accent: "coral",
     cuteness: 68,
   },
@@ -256,7 +263,8 @@ const posts = [
 ];
 
 /* ── SIDEBAR ───────────────────────────────────────────────────────── */
-function Sidebar() {
+function Sidebar({ onTrocarSecao, secaoAtiva }) {
+  const [modalAberto, setModalAberto] = useState(null);
   return (
     <aside className="feed-sidebar">
       <div className="feed-logo">
@@ -269,13 +277,13 @@ function Sidebar() {
       </label>
 
       <div className="quick-actions">
-        <button type="button">
+        <button type="button" onClick={() => setModalAberto("story")}>
           <span>
             <Icon name="plus" />
           </span>
           Criar story
         </button>
-        <button type="button">
+        <button type="button" onClick={() => setModalAberto("post")}>
           <span>
             <Icon name="edit" />
           </span>
@@ -284,29 +292,55 @@ function Sidebar() {
       </div>
 
       <nav className="feed-nav" aria-label="Navegação principal">
-        <a className="active" href="#inicio">
+
+        <a className={secaoAtiva === "feed" ? "active" : ""}
+          onClick={() => onTrocarSecao("feed")}>
           <Icon name="home" />
           Início
         </a>
-        <a href="#favoritos">
+        <a className={secaoAtiva === "anuncios" ? "active" : ""}
+          onClick={() => onTrocarSecao("anuncios")}>
+          <Icon name="store" />
+          Anúncios
+        </a>
+        <a onClick={() => setModalAberto("favoritos")} href="#favoritos">
           <Icon name="star" />
           Favoritos
         </a>
-        <a href="#comunidades">
-          <Icon name="users" />
-          Comunidades
+        <a onClick={() => setModalAberto("messages")} href="#comunidades">
+          <Icon name="mail" />
+          Mensagens
         </a>
-        <a href="#notificacoes">
+        <a onClick={() => setModalAberto("notification")} href="#notificacoes">
           <Icon name="bell" />
           Notificações
         </a>
+        <CreateFavoritosModal
+          isOpen={modalAberto === "favoritos"}
+          onClose={() => setModalAberto(null)}
+          title="Meus Favoritos"
+        />
+        <CreateNotificationModal
+          isOpen={modalAberto === "notification"}
+          onClose={() => setModalAberto(null)}
+          title="Minhas Notificações"
+        />
+        <CreateMessagesModal
+          isOpen={modalAberto === "messages"}
+          onClose={() => setModalAberto(null)}
+          title="Minhas Mensagens"
+        />
       </nav>
 
       <section className="suggestions" aria-label="Sugestões">
         <h2>Sugestões para você</h2>
         {suggestions.map(([name, handle, avatar]) => (
           <article className="suggestion" key={handle}>
-            <img src={avatar} alt="" />
+            <img
+              onClick={() => setModalAberto("message")}
+              src={avatar}
+              alt=""
+            />
             <div>
               <strong>{name}</strong>
               <span>{handle}</span>
@@ -318,6 +352,21 @@ function Sidebar() {
           Ver todas as sugestões
         </button>
       </section>
+      <CreateMessageModal
+        isOpen={modalAberto === "message"}
+        onClose={() => setModalAberto(null)}
+        title="Envie uma Mensagem"
+      />
+      <CreatePostModal
+        isOpen={modalAberto === "post"}
+        onClose={() => setModalAberto(null)}
+        title="Criar nova publicação"
+      />
+      <CreateStoryModal
+        isOpen={modalAberto === "story"}
+        onClose={() => setModalAberto(null)}
+        title="Criar novo Story"
+      />
     </aside>
   );
 }
@@ -480,32 +529,18 @@ function Composer({ usuario }) {
           src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=160&q=80"
           alt=""
         />
-           <input 
-          type="text" 
+        <input
+          type="text"
           placeholder={`No que você está pensando${usuario?.nome ? `, ${usuario.nome.split(" ")[0]}` : ""}?`}
         />
-                <button type="button">
+        <button type="button">
           <span>
             <Icon name="edit" />
           </span>
           Publicar
-          </button>
-
-      </div>
-      <div className="composer-actions">
-        <button type="button">
-          <Icon name="image" />
-          Foto
-        </button>
-        <button type="button">
-          <Icon name="video" />
-          Vídeo
-        </button>
-        <button type="button">
-          <Icon name="pin" />
-          Local
         </button>
       </div>
+      <div className="composer-actions"></div>
     </section>
   );
 }
@@ -523,7 +558,7 @@ function Post({ post }) {
     (total, value) => total + value,
     0,
   );
-  
+
   // O cálculo da popularidade já está presente e funcional
   const popularity = Math.min(
     99,
@@ -533,8 +568,7 @@ function Post({ post }) {
         100,
     ),
   );
-  
-  const weeklyValues = [35, 48, 42, 61, 55, 69, popularity];
+
   const reactionOptions = [
     ["amei", { img: "/amei.gif" }],
     ["top", { img: "/top.gif" }],
@@ -543,21 +577,28 @@ function Post({ post }) {
   ];
 
   function addReaction(key) {
-    const somCurtida = new Audio("https://actions.google.com/sounds/v1/cartoon/pop.ogg");
-    somCurtida.volume = 0.5; 
+    const somCurtida = new Audio(
+      "https://actions.google.com/sounds/v1/cartoon/pop.ogg",
+    );
+    somCurtida.volume = 0.5;
     somCurtida.play().catch(() => {});
     setReactions((current) => ({
       ...current,
       [key]: current[key] + 1,
     }));
   }
-
+  const [modalAberto, setModalAberto] = useState(null);
   return (
     <article className="post-card">
       <section className="post-main">
         <header className="post-header">
           {post.avatar ? (
-            <img className="post-avatar" src={post.avatar} alt="" />
+            <img
+              onClick={() => setModalAberto("message")}
+              className="post-avatar"
+              src={post.avatar}
+              alt=""
+            />
           ) : (
             <span className="post-avatar brand-avatar">
               <Icon name="paw" />
@@ -572,17 +613,16 @@ function Post({ post }) {
             </h2>
             <p>{post.time} · publico</p>
           </div>
-          {post.text && <p className="post-text">{post.text}</p>}  
+          {post.text && <p className="post-text">{post.text}</p>}
         </header>
 
         {post.type === "quote" ? (
           <div className="quote-media">
             <span>
-              "Um pet não é apenas
+              "ADOTE UM PET
               <br />
               um animal, é família!"
             </span>
-            <b>♥</b>
           </div>
         ) : (
           <figure className={`post-media ${post.type}`}>
@@ -591,11 +631,9 @@ function Post({ post }) {
 
             <figcaption className="media-caption">
               <button className="side-action primary" type="button">
-                
                 <Icon name="share" />
               </button>
               <button className="side-action" type="button">
-                
                 <Icon name="bookmark" />
               </button>
             </figcaption>
@@ -620,6 +658,11 @@ function Post({ post }) {
             )}
           </figure>
         )}
+        <CreateMessageModal
+          isOpen={modalAberto === "message"}
+          onClose={() => setModalAberto(null)}
+          title="Envie uma Mensagem"
+        />
       </section>
 
       <aside
@@ -667,30 +710,34 @@ function Post({ post }) {
 }
 
 /* ── TOPBAR ────────────────────────────────────────────────────────── */
+
 function Topbar() {
+  const [modalAberto, setModalAberto] = useState(null);
   return (
     <header className="topbar">
       <img className="logoTopbar" src="/logo2.png" alt="PetBook" />
       <div />
-      <button className="icon-button" type="button" aria-label="Notificações">
-        <Icon name="bell" />
-      </button>
-      <button className="icon-button" type="button" aria-label="Mensagens">
-        <Icon name="mail" />
-      </button>
-      <button className="profile-button" type="button" aria-label="Perfil">
+      <button
+        onClick={() => setModalAberto("menu")}
+        className="profile-button"
+        type="button"
+        aria-label="Perfil"
+      >
         <img
           src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=120&q=80"
           alt=""
         />
-        <span>⌄</span>
       </button>
+      <CreateMenuModal
+        isOpen={modalAberto === "menu"}
+        onClose={() => setModalAberto(null)}
+      />
     </header>
   );
 }
-
 /* ── ROOT ──────────────────────────────────────────────────────────── */
 export default function Feed() {
+  const [secaoAtiva, setSecaoAtiva] = useState("feed")
   let usuario = null;
   try {
     usuario = JSON.parse(localStorage.getItem("usuario"));
@@ -698,17 +745,24 @@ export default function Feed() {
 
   return (
     <main className="petbook-feed" id="inicio">
-      <Sidebar />
-      <section className="feed-content">
-        <Topbar />
-        <Stories />
-        <Composer usuario={usuario} />
-        <section className="posts" aria-label="Publicações">
-          {posts.map((post) => (
-            <Post post={post} key={post.author} />
-          ))}
-        </section>
+      <Sidebar onTrocarSecao={setSecaoAtiva} secaoAtiva={secaoAtiva} />
+<section className="feed-content">
+  <Topbar />
+  
+  {secaoAtiva === "feed" ? (
+    <>
+      <Stories />
+      <Composer usuario={usuario} />
+      <section className="posts" aria-label="Publicações">
+        {posts.map((post) => (
+          <Post post={post} key={post.author} />
+        ))}
       </section>
-    </main>
+    </>
+  ) : (
+    <AnunciosGrid />
+  )}
+</section>    
+</main>
   );
 }

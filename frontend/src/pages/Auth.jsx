@@ -25,7 +25,7 @@ export default function Auth() {
       setModo(novoModo);
       setSaindo(false);
       setAnimando(false);
-    }, 3000);
+    }, 2000);
   }
 async function handleLogin() {
   setErro('')

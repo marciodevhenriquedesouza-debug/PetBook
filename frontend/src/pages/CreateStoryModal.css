@@ -1,0 +1,116 @@
+:root {
+  --lilac-500: #8a5fe8;
+  --lilac-600: #7342d4;
+  --lilac-700: #5e2dbb;
+
+  --green-400: #2aa39d;
+  --green-500: #189991;
+  --green-600: #087a78;
+  --green-glow: rgba(42, 163, 157, 0.28);
+}
+
+/* O fundo escuro que cobre a tela toda */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px); /* Efeito de vidro embaçado no fundo */
+  display: grid;
+  place-items: center; /* Centraliza a janela perfeitamente */
+  z-index: 9999; /* Fica por cima de TUDO na página */
+}
+
+/* A janelinha em si */
+.modal-content {
+  background: white;
+  height: 500px;
+  width: 90%;
+  max-width: 500px;
+  border-radius: 20px;
+  padding: 24px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  animation: slideUp 0.3s ease-out; /* Animação suave ao abrir */
+}
+
+.modal-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.modal-header h2 {
+  font-size: 20px;
+  color: var(--text-2);
+  margin: 0;
+}
+
+
+.modal-body  {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 80%;
+  border: 2px solid rgba(138, 95, 232, 0.5);
+  border-radius: 12px;
+  font-size: 30px;
+  font-family: inherit;
+  outline: none;
+  color: rgb(28, 21, 41, 0.5);
+}
+
+.modal-body textarea:focus {
+  border-color: var(--lilac-500);
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.cancel-button,
+.publish-button {
+  padding: 10px 20px;
+  border-radius: 99px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+}
+.addMidia-button,
+.addLocation-button {
+  background-color: var(--green-600);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 99px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.cancel-button {
+  background: rgba(0, 0, 0, 0.05);
+  color: var(--text-3);
+}
+
+.publish-button {
+  background: var(--lilac-500);
+  color: white;
+}
+
+/* Animação para a janela "surgir" de baixo para cima */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

@@ -27,13 +27,13 @@
 }
 .modo-login .painel-color.animando {
   animation:
-    slide_login 3s ease-in-out forwards,
+    slide_login 2s ease-in-out forwards,
     opac 2s ease-in-out 3s;
 }
 
 .modo-register .painel-color.animando {
   animation:
-    slide_register 3s ease-in-out forwards,
+    slide_register 2s ease-in-out forwards,
     opac 2s ease-in-out 3s;
 }
 
