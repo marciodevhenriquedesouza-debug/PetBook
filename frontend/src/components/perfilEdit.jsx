@@ -1,5 +1,5 @@
 import { createPortal } from "react-dom";
-import "./perfilEdit.css";
+import "./style/perfilEdit.css";
 
 const iconProps = {
   width: 24,
@@ -25,7 +25,9 @@ export default function CreateperfilEditModal({ isOpen, onClose, title }) {
         </header>
 
         <div className="modalPerfil-body">
-          <div className="photoUser"></div>
+          <div className="photoUser">
+
+          </div>
           <div className="photo-edit">
             <svg {...iconProps}>
               <path d="M12 20h9" />
@@ -37,22 +39,33 @@ export default function CreateperfilEditModal({ isOpen, onClose, title }) {
             <div>Nome: Ana Paula Soares</div>
             <div>Idade: 27 anos</div>
             <div>Email: anas27paula@gmail.com</div>
+            <div className="bio">
+              <h3>Bio</h3>
+              <p>
+                Adoro animais de estimação e sou voluntária em um abrigo local. Sempre em busca de novas aventuras com meus amigos peludos!
+              </p>
+            </div>
+
             <div className="pets">
-              Pets: 2
-              <div>
-                <svg {...iconProps}>
-                  <path d="M12 20h9" />
-                  <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L8 18l-4 1 1-4Z" />
-                </svg>
+              <h3>Meus Pets</h3>
+              <div className="pet-card">
+                <div className="pet-photo">
+                  <img src="https://via.placeholder.com/200" alt="Pet 1" />
+                </div>
+                <div className="pet-info">
+                  <p>Nome: Luna</p>
+                  <p>Idade: 3 anos</p>
+                </div>
               </div>
             </div>
           </div>
         </div>
 
         <footer className="modal-footer">
-          <button className="cancel-button" onClick={onClose}>
+          <button className="cancelButton" onClick={onClose}>
             Cancelar
           </button>
+          <button className="edit-button">Editar Perfil</button>
           <button className="save-button">Salvar</button>
         </footer>
       </div>

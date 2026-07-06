@@ -1,5 +1,5 @@
 import { useId } from 'react';
-import './PopularityCard.css';
+import './style/PopularityCard.css';
 
 /**
  * PopularityCard
@@ -11,41 +11,41 @@ import './PopularityCard.css';
  * @example
  * <PopularityCard popularity={86} />
  */
-export default function PopularityCard({ popularity = 0 }) {
+export default function PopularityCard({ popularity = 30 }) {
   // Clamp e calcular rotação da agulha
-  const v    = Math.max(0, Math.min(100, Number(popularity)));
-  const deg  = v * 1.8 - 90;   // -90° (esq) → 0° (cima) → +90° (dir)
+  const v = Math.max(0, Math.min(100, Number(popularity)));
+  const deg = v * 1.8 - 90;   // -90° (esq) → 0° (cima) → +90° (dir)
   const zone = v < 34 ? 0 : v < 67 ? 1 : 2;
 
   // IDs únicos por instância (evita conflito se o componente aparecer mais de uma vez)
   const uid = useId().replace(/:/g, '');
   const ID = {
-    arcFill:  `${uid}-arcFill`,
+    arcFill: `${uid}-arcFill`,
     glow1Clr: `${uid}-glow1Clr`,
     glow2Clr: `${uid}-glow2Clr`,
     glow3Clr: `${uid}-glow3Clr`,
-    gf:       `${uid}-gf`,
-    ns:       `${uid}-ns`,
-    capG:     `${uid}-capG`,
-    textArc:  `${uid}-textArc`,
+    gf: `${uid}-gf`,
+    ns: `${uid}-ns`,
+    capG: `${uid}-capG`,
+    textArc: `${uid}-textArc`,
   };
 
   // Estilos dinâmicos gerados a partir da zona ativa
   const glowStyle = (i) => ({
-    opacity:    i === zone ? 0.7 : 0,
+    opacity: i === zone ? 0.7 : 0,
     transition: 'opacity .5s ease',
   });
 
   const faceStyle = (i) => ({
-    opacity:    i === zone ? 1 : 0,
-    fontSize:   i === zone ? '24px' : '22px',
+    opacity: i === zone ? 1 : 0,
+    fontSize: i === zone ? '24px' : '22px',
     transition: 'opacity .4s ease, font-size .4s ease',
   });
 
   const needleStyle = {
     transformOrigin: '130px 152px',
-    transform:       `rotate(${deg}deg)`,
-    transition:      'transform .7s cubic-bezier(.34,1.56,.64,1)',
+    transform: `rotate(${deg}deg)`,
+    transition: 'transform .7s cubic-bezier(.34,1.56,.64,1)',
   };
 
   /*
@@ -96,9 +96,9 @@ export default function PopularityCard({ popularity = 0 }) {
               gradientUnits="userSpaceOnUse"
               x1="42" y1="152" x2="218" y2="152"
             >
-              <stop offset="0%"   stopColor="#d4b8ff" />
-              <stop offset="33%"  stopColor="#b08ef5" />
-              <stop offset="66%"  stopColor="#8455d8" />
+              <stop offset="0%" stopColor="#d4b8ff" />
+              <stop offset="33%" stopColor="#b08ef5" />
+              <stop offset="66%" stopColor="#8455d8" />
               <stop offset="100%" stopColor="#4f1f9a" />
             </linearGradient>
 
@@ -106,19 +106,19 @@ export default function PopularityCard({ popularity = 0 }) {
             <linearGradient id={ID.glow1Clr}
               gradientUnits="userSpaceOnUse"
               x1="42" y1="152" x2="86" y2="75.8">
-              <stop offset="0%"   stopColor="#e0caff" />
+              <stop offset="0%" stopColor="#e0caff" />
               <stop offset="100%" stopColor="#c09eff" />
             </linearGradient>
             <linearGradient id={ID.glow2Clr}
               gradientUnits="userSpaceOnUse"
               x1="86" y1="75.8" x2="174" y2="75.8">
-              <stop offset="0%"   stopColor="#b890ff" />
+              <stop offset="0%" stopColor="#b890ff" />
               <stop offset="100%" stopColor="#9565ee" />
             </linearGradient>
             <linearGradient id={ID.glow3Clr}
               gradientUnits="userSpaceOnUse"
               x1="174" y1="75.8" x2="218" y2="152">
-              <stop offset="0%"   stopColor="#9460e0" />
+              <stop offset="0%" stopColor="#9460e0" />
               <stop offset="100%" stopColor="#6025b8" />
             </linearGradient>
 
@@ -140,8 +140,8 @@ export default function PopularityCard({ popularity = 0 }) {
 
             {/* Brilho do pivot */}
             <radialGradient id={ID.capG} cx="35%" cy="30%">
-              <stop offset="0%"   stopColor="#ffffff" />
-              <stop offset="60%"  stopColor="#e8d8ff" />
+              <stop offset="0%" stopColor="#ffffff" />
+              <stop offset="60%" stopColor="#e8d8ff" />
               <stop offset="100%" stopColor="#c4a0f0" />
             </radialGradient>
           </defs>
@@ -178,7 +178,7 @@ export default function PopularityCard({ popularity = 0 }) {
             fill="none" stroke={`url(#${ID.arcFill})`} strokeWidth="52" strokeLinecap="butt" />
 
           {/* 4 — Ticks divisórios (linhas radiais brancas) */}
-          <line x1="73"  y1="53.3" x2="99"  y2="98.3"
+          <line x1="73" y1="53.3" x2="99" y2="98.3"
             stroke="white" strokeWidth="3.5" strokeLinecap="round" />
           <line x1="187" y1="53.3" x2="161" y2="98.3"
             stroke="white" strokeWidth="3.5" strokeLinecap="round" />
@@ -210,10 +210,10 @@ export default function PopularityCard({ popularity = 0 }) {
 
           {/* 6b — Carinhas — apenas a zona ativa é visível */}
           {/* Tímido: 150° → (54, 115) */}
-          <text x="54"  y="115" fontSize="22" textAnchor="middle"
+          <text x="54" y="115" fontSize="22" textAnchor="middle"
             dominantBaseline="middle" style={faceStyle(0)}>😶</text>
           {/* Bombando: 90° → (130, 71) */}
-          <text x="130" y="71"  fontSize="22" textAnchor="middle"
+          <text x="130" y="71" fontSize="22" textAnchor="middle"
             dominantBaseline="middle" style={faceStyle(1)}>😊</text>
           {/* Arrasou!: 30° → (206, 115) */}
           <text x="206" y="115" fontSize="22" textAnchor="middle"

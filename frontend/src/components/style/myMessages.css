@@ -10,7 +10,7 @@
 }
 
 /* O fundo escuro que cobre a tela toda */
-.modalFavoritos-overlay {
+.modalMessages-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -24,7 +24,7 @@
 }
 
 /* A janelinha em si */
-.modalFavoritos-content {
+.modalMessages-content {
   background: white;
   height: 500px;
   width: 90%;
@@ -34,22 +34,37 @@
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
   animation: slideUp 0.3s ease-out; /* Animação suave ao abrir */
 }
+footer {
+  display: flex;
+  justify-content: center;
+  
+}
+.cancel-button {
+  border: solid 1.5px var(--lilac-500);
+  padding: 10px 15px;
+  background: transparent;
+  margin-top: 10px;
+  font-size: 20px;
+  cursor: pointer;
+  color: var(--text-2);
+}
 
-.modalFavoritos-header {
+
+.modalMessages-header {
   display: flex;
   justify-content: center;
   align-items: center;
   margin-bottom: 20px;
 }
 
-.modalFavoritos-header h2 {
+.modalMessages-header h2 {
   font-size: 20px;
   color: var(--text-2);
   margin: 0;
 }
 
 
-.modalFavoritos-body  {
+.modalMessages-body  {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -63,7 +78,7 @@
   color: rgb(28, 21, 41, 0.5);
 }
 
-.modalFavoritos-body textarea:focus {
+.modalMessages-body textarea:focus {
   border-color: var(--lilac-500);
 }
 

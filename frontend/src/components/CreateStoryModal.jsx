@@ -1,25 +1,20 @@
 import { createPortal } from "react-dom";
-import "./CreatePostModal.css";
+import "./style/CreateStoryModal.css";
 
-export default function CreatePostModal({ isOpen, onClose, title }) {
+export default function CreateStoryModal({ isOpen, onClose, title }) {
   // Se estiver fechado, não desenha nada
   if (!isOpen) return null;
 
   // O createPortal "teletransporta" esse HTML para o document.body
   return createPortal(
-    <div className="modal2-overlay" onClick={onClose}>
-      <div className="modal2-content" onClick={(e) => e.stopPropagation()}>
+    <div className="modal-overlay" onClick={onClose}>
+      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
         
         <header className="modal-header">
           <h2>{title}</h2>
         </header>
 
-        <div className="modal-body">
-          <textarea 
-            placeholder="O que você quer compartilhar?"
-            autoFocus
-          ></textarea>
-        </div>
+        <div className="modal-body">Preview do seu Story</div>
 
         <footer className="modal-footer">
           <button className="addMidia-button">Mídia</button>

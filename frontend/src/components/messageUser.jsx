@@ -1,5 +1,5 @@
 import { createPortal } from "react-dom";
-import "./messageUser.css";
+import "./style/messageUser.css";
 
 export default function CreateMessageModal({ isOpen, onClose, title }) {
   // Se estiver fechado, não desenha nada

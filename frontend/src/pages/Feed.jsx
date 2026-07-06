@@ -1,14 +1,15 @@
 ﻿import { useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
+
 import "./Feed.css";
-import PopularityCard from "./PopularityCard";
-import CreatePostModal from "./CreatePostModal";
-import CreateStoryModal from "./CreateStoryModal";
-import CreateMessageModal from "./messageUser";
-import CreateMenuModal from "./menuSusp";
-import CreateNotificationModal from "./myNotification";
-import CreateMessagesModal from "./myMessages";
-import CreateFavoritosModal from "./myFavoritos";
-import AnunciosGrid from "../components/AnunciosGrid"
+import PopularityCard from "../components/PopularityCard";
+import CreatePostModal from "../components/CreatePostModal";
+import CreateStoryModal from "../components/CreateStoryModal";
+import CreateMessageModal from "../components/messageUser";
+import CreateNotificationModal from "../components/myNotification";
+import CreateMessagesModal from "../components/myMessages";
+import CreateFavoritosModal from "../components/myFavoritos";
+import CreateperfilEditModal from "../components/perfilEdit";
 
 const iconProps = {
   width: 24,
@@ -263,8 +264,26 @@ const posts = [
 ];
 
 /* ── SIDEBAR ───────────────────────────────────────────────────────── */
-function Sidebar({ onTrocarSecao, secaoAtiva }) {
+function Sidebar() {
   const [modalAberto, setModalAberto] = useState(null);
+
+  function handleInicioClick(event) {
+    event.preventDefault();
+
+    const sidebar = document.querySelector(".feed-sidebar");
+    const feedContent = document.querySelector(".feed-content");
+
+    if (sidebar) {
+      sidebar.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    if (feedContent) {
+      feedContent.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
   return (
     <aside className="feed-sidebar">
       <div className="feed-logo">
@@ -293,15 +312,9 @@ function Sidebar({ onTrocarSecao, secaoAtiva }) {
 
       <nav className="feed-nav" aria-label="Navegação principal">
 
-        <a className={secaoAtiva === "feed" ? "active" : ""}
-          onClick={() => onTrocarSecao("feed")}>
+        <a href="#inicio" onClick={handleInicioClick}>
           <Icon name="home" />
           Início
-        </a>
-        <a className={secaoAtiva === "anuncios" ? "active" : ""}
-          onClick={() => onTrocarSecao("anuncios")}>
-          <Icon name="store" />
-          Anúncios
         </a>
         <a onClick={() => setModalAberto("favoritos")} href="#favoritos">
           <Icon name="star" />
@@ -375,8 +388,8 @@ function Sidebar({ onTrocarSecao, secaoAtiva }) {
 function Stories() {
   const [activeStory, setActiveStory] = useState(1);
   const [direction, setDirection] = useState(null); // 'left' | 'right'
-  const [cutenessVotes, setCutenessVotes] = useState(
-    stories.map((s) => s.cuteness),
+  const [cutenessVotes, setCutenessVotes] = useState(() =>
+    stories.map(() => 30),
   );
   const autoRef = useRef(null);
 
@@ -531,7 +544,7 @@ function Composer({ usuario }) {
         />
         <input
           type="text"
-          placeholder={`No que você está pensando${usuario?.nome ? `, ${usuario.nome.split(" ")[0]}` : ""}?`}
+          placeholder={`Publique rápido , no que você está pensando${usuario?.nome ? `, ${usuario.nome.split(" ")[0]}` : ""}?`}
         />
         <button type="button">
           <span>
@@ -553,6 +566,7 @@ function Post({ post }) {
     meh: Math.max(1, Math.round(post.reactions * 0.03)),
     ruim: 1,
   });
+  const [activeReaction, setActiveReaction] = useState(null);
 
   const totalReactions = Object.values(reactions).reduce(
     (total, value) => total + value,
@@ -565,7 +579,7 @@ function Post({ post }) {
     Math.round(
       ((reactions.amei * 1.15 + reactions.top * 0.85 - reactions.ruim * 2) /
         Math.max(1, totalReactions)) *
-        100,
+      100,
     ),
   );
 
@@ -581,7 +595,9 @@ function Post({ post }) {
       "https://actions.google.com/sounds/v1/cartoon/pop.ogg",
     );
     somCurtida.volume = 0.5;
-    somCurtida.play().catch(() => {});
+    somCurtida.play().catch(() => { });
+
+    setActiveReaction((current) => (current === key ? null : key));
     setReactions((current) => ({
       ...current,
       [key]: current[key] + 1,
@@ -672,9 +688,9 @@ function Post({ post }) {
         <p className="section-title">Reagir ao post</p>
 
         <div className="reaction-grid">
-          {reactionOptions.map(([key, emoji, label]) => (
+          {reactionOptions.map(([key, emoji]) => (
             <button
-              className={`reaction ${key === "amei" ? "hot" : ""}`}
+              className={`reaction ${activeReaction === key ? "active-reaction" : ""}`}
               type="button"
               key={key}
               onClick={() => addReaction(key)}
@@ -683,7 +699,7 @@ function Post({ post }) {
                 {typeof emoji === "object" ? (
                   <img
                     src={emoji.img}
-                    alt={label}
+                    alt={key}
                     style={{ width: 45, height: 45 }}
                   />
                 ) : (
@@ -713,56 +729,64 @@ function Post({ post }) {
 
 function Topbar() {
   const [modalAberto, setModalAberto] = useState(null);
+  const navigate = useNavigate();
+
+
+  function handleLogout() {
+    localStorage.removeItem("token");
+    localStorage.removeItem("usuario");
+    navigate("/");
+  }
   return (
     <header className="topbar">
       <img className="logoTopbar" src="/logo2.png" alt="PetBook" />
       <div />
-      <button
-        onClick={() => setModalAberto("menu")}
-        className="profile-button"
-        type="button"
-        aria-label="Perfil"
-      >
-        <img
-          src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=120&q=80"
-          alt=""
-        />
-      </button>
-      <CreateMenuModal
-        isOpen={modalAberto === "menu"}
+      <div className="topbar-actions">
+        <button
+          onClick={() => setModalAberto("perfil")}
+          className="profile-button"
+          type="button"
+          aria-label="Perfil"
+        >
+          <img
+            src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=120&q=80"
+            alt=""
+          />
+        </button>
+        <button onClick={handleLogout} className="exit-Button">Sair</button>
+      </div>
+      <CreateperfilEditModal
+        isOpen={modalAberto === "perfil"}
         onClose={() => setModalAberto(null)}
       />
     </header>
+
   );
 }
 /* ── ROOT ──────────────────────────────────────────────────────────── */
 export default function Feed() {
-  const [secaoAtiva, setSecaoAtiva] = useState("feed")
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
+
   let usuario = null;
   try {
     usuario = JSON.parse(localStorage.getItem("usuario"));
-  } catch {}
+  } catch { }
 
   return (
     <main className="petbook-feed" id="inicio">
-      <Sidebar onTrocarSecao={setSecaoAtiva} secaoAtiva={secaoAtiva} />
-<section className="feed-content">
-  <Topbar />
-  
-  {secaoAtiva === "feed" ? (
-    <>
-      <Stories />
-      <Composer usuario={usuario} />
-      <section className="posts" aria-label="Publicações">
-        {posts.map((post) => (
-          <Post post={post} key={post.author} />
-        ))}
+      <Sidebar />
+      <section className="feed-content">
+        <Topbar />
+        <Stories />
+        <Composer usuario={usuario} />
+        <section className="posts" aria-label="Publicações">
+          {posts.map((post) => (
+            <Post post={post} key={post.author} />
+          ))}
+        </section>
       </section>
-    </>
-  ) : (
-    <AnunciosGrid />
-  )}
-</section>    
-</main>
+    </main>
   );
 }

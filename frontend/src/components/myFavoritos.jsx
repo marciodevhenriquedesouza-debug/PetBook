@@ -1,5 +1,5 @@
 import { createPortal } from "react-dom";
-import "./myFavoritos.css";
+import "./style/myFavoritos.css";
 
 export default function CreateFavoritosModal({ isOpen, onClose, title }) {
   // Se estiver fechado, não desenha nada
@@ -17,7 +17,9 @@ export default function CreateFavoritosModal({ isOpen, onClose, title }) {
         <div className="modalFavoritos-body">
           
         </div>
-
+<footer>
+  <button className="cancel-button" onClick={onClose}>X</button>
+</footer>
       </div>
     </div>,
     document.body // <-- Destino do teletransporte!
