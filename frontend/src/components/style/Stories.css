@@ -1,0 +1,328 @@
+.stories {
+  position: relative;
+  padding: 18px 52px;
+  margin-bottom: 18px;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  background: linear-gradient(145deg,
+      rgba(255 255 255 / 0.88) 0%,
+      rgba(245 240 255 / 0.82) 100%);
+}
+
+/* Decorative ambient orbs */
+.stories::before,
+.stories::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.stories::before {
+  width: 200px;
+  height: 200px;
+  top: -60px;
+  right: -40px;
+  background: radial-gradient(circle,
+      rgba(138, 95, 232, 0.12),
+      transparent 70%);
+}
+
+.stories::after {
+  width: 150px;
+  height: 150px;
+  bottom: -40px;
+  left: 10px;
+  background: radial-gradient(circle, var(--green-glow), transparent 70%);
+}
+
+.stories-track {
+  min-height: 420px;
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(230px, 1.12fr) minmax(0,
+      0.85fr);
+  align-items: center;
+  gap: 16px;
+  perspective: 1400px;
+  perspective-origin: 50% 40%;
+}
+
+
+
+/* ── STORY CARD BASE ─────────────────────────────────────────────── */
+.story-card {
+  min-height: 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  padding: 10px 10px 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(180deg, #fff 0%, #faf8ff 100%);
+  overflow: hidden;
+  cursor: pointer;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+
+  /* default (side cards) */
+  transform: scale(0.88) translateY(10px) rotateY(0deg);
+  opacity: 0.65;
+  filter: blur(0.5px);
+
+  transition:
+    transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1),
+    opacity 0.7s ease,
+    filter 0.7s ease,
+    box-shadow 0.7s ease,
+    border-color 0.7s ease;
+
+  will-change: transform, opacity;
+}
+
+/* Shimmer overlay on side cards */
+.story-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(180deg,
+      rgba(245, 240, 255, 0.4) 0%,
+      transparent 60%);
+  pointer-events: none;
+  transition: opacity 0.7s ease;
+}
+
+.story-card:hover:not(.featured) {
+  opacity: 0.85;
+  filter: blur(0px);
+}
+
+/* PREV card */
+.story-card.prev {
+  transform: scale(0.9) rotateY(12deg) translateX(14px) translateZ(-36px);
+  transform-origin: right center;
+  opacity: 0.72;
+}
+
+/* NEXT card */
+.story-card.next {
+  transform: scale(0.9) rotateY(-12deg) translateX(-14px) translateZ(-36px);
+  transform-origin: left center;
+  opacity: 0.72;
+}
+
+/* ACTIVE / featured card */
+.story-card.featured {
+  border: 2px solid var(--lilac-400);
+  box-shadow:
+    0 0 0 4px rgba(138, 95, 232, 0.15),
+    0 28px 64px rgba(107, 70, 193, 0.26),
+    0 8px 20px rgba(107, 70, 193, 0.12);
+  opacity: 1;
+  filter: blur(0px);
+  transform: scale(1) translateY(-8px) translateZ(0);
+  z-index: 3;
+  cursor: default;
+  background: linear-gradient(180deg, #fff 0%, #f5f0ff 100%);
+}
+
+.story-card.featured::before {
+  opacity: 0;
+}
+
+
+.story-card img {
+  width: 100%;
+  height: 215px;
+  border-radius: 14px;
+  object-fit: cover;
+  border: 1.5px solid rgba(138, 95, 232, 0.2);
+  box-shadow: 0 6px 20px rgba(107, 70, 193, 0.18);
+  transition:
+    transform 0.4s ease,
+    box-shadow 0.4s ease;
+}
+
+.story-card.featured img {
+  height: 228px;
+  border-color: var(--lilac-400);
+  box-shadow: 0 10px 30px rgba(107, 70, 193, 0.3);
+}
+
+.story-card.featured:hover img {
+  transform: scale(1.02);
+}
+
+/* Story progress bar (top of featured) */
+.story-card.featured::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg,
+      var(--lilac-500) 0%,
+      var(--green-400) 60%,
+      transparent 100%);
+  border-radius: 0 0 4px 4px;
+  animation: storyProgress 6s linear infinite;
+}
+
+@keyframes storyProgress {
+  from {
+    background-size: 0% 100%;
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+
+  to {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+}
+
+/* Texts */
+.story-card strong {
+  margin-top: 12px;
+  color: var(--text-2);
+  font-size: 15px;
+  font-family: "Nunito", sans-serif;
+  font-weight: 800;
+  text-align: center;
+}
+
+.story-card.featured strong {
+  color: var(--lilac-600);
+  font-size: 17px;
+}
+
+.story-card p {
+  margin-top: 4px;
+  color: var(--text-3);
+  font-size: 14px;
+  text-align: center;
+}
+
+/* ── ARROWS ──────────────────────────────────────────────────────── */
+.story-arrow {
+  width: 40px;
+  height: 68px;
+  display: grid;
+  place-items: center;
+  position: absolute;
+  top: 50%;
+  z-index: 10;
+  border-radius: 999px;
+  background: rgba(255 255 255 / 0.9);
+  border: 1px solid var(--lilac-600);
+  color: var(--lilac-600);
+  font-size: 36px;
+  line-height: 1;
+  box-shadow: var(--shadow-md);
+  cursor: pointer;
+  transform: translateY(-50%);
+  backdrop-filter: blur(8px);
+  transition:
+    background 0.2s,
+    color 0.2s,
+    transform 0.2s;
+}
+
+.story-arrow:hover {
+  background: linear-gradient(135deg, var(--lilac-500), var(--lilac-600));
+  color: #fff;
+  transform: translateY(-50%) scale(1.06);
+}
+
+.story-arrow-left {
+  left: 8px;
+}
+
+.story-arrow-right {
+  right: 8px;
+}
+
+/* ── FOFURÔMETRO ─────────────────────────────────────────────────── */
+.cuteness-panel {
+  width: 100%;
+  margin-top: auto;
+  padding: 12px 12px 8px;
+  border-radius: var(--radius-sm);
+  background: rgba(245, 240, 255, 0.8);
+  border: 1.5px solid rgba(138, 95, 232, 0.25);
+  backdrop-filter: blur(6px);
+}
+
+.cuteness-copy,
+.cuteness-scale {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cuteness-copy span {
+  color: var(--lilac-600);
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+}
+
+.cuteness-copy strong {
+  margin: 0;
+  color: var(--coral);
+  font-size: 20px;
+  font-family: "Nunito", sans-serif;
+  font-weight: 900;
+}
+
+.cuteness-slider {
+  display: block;
+  margin: 8px 0 4px;
+}
+
+.cuteness-slider input {
+  width: 100%;
+  height: 10px;
+  appearance: none;
+  border-radius: 999px;
+  outline: 0;
+  background: linear-gradient(90deg,
+      var(--lilac-400) 0 var(--cuteness),
+      rgba(138, 95, 232, 0.15) var(--cuteness) 100%);
+  cursor: pointer;
+}
+
+.cuteness-slider input::-webkit-slider-thumb {
+  width: 24px;
+  height: 24px;
+  appearance: none;
+  border: 3px solid #fff;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--lilac-400), var(--lilac-600));
+  box-shadow: 0 4px 12px rgba(107, 70, 193, 0.35);
+  transition: transform 0.15s;
+}
+
+.cuteness-slider input::-webkit-slider-thumb:active {
+  transform: scale(1.2);
+}
+
+.cuteness-slider input::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border: 3px solid #fff;
+  border-radius: 50%;
+  background: var(--lilac-500);
+  box-shadow: 0 4px 12px rgba(107, 70, 193, 0.35);
+}
+
+.cuteness-scale {
+  color: var(--text-3);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
