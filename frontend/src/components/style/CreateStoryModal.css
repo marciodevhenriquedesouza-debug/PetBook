@@ -74,7 +74,7 @@
   margin-top: 20px;
 }
 
-.cancel-button,
+.cancelButton,
 .publish-button {
   padding: 10px 20px;
   border-radius: 99px;
@@ -82,6 +82,11 @@
   font-weight: 600;
   cursor: pointer;
 }
+.cancelButton {
+  background: rgba(0, 0, 0, 0.05);
+  color: var(--text-3);
+}
+
 .addMidia-button,
 .addLocation-button {
   background-color: var(--green-600);
@@ -93,10 +98,6 @@
   cursor: pointer;
 }
 
-.cancel-button {
-  background: rgba(0, 0, 0, 0.05);
-  color: var(--text-3);
-}
 
 .publish-button {
   background: var(--lilac-500);

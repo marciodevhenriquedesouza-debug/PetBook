@@ -62,6 +62,7 @@ export default function CreateperfilEditModal({ isOpen, onClose, title }) {
         </div>
 
         <footer className="modal-footer">
+          <button className="delete-button">Apagar Perfil</button>
           <button className="cancelButton" onClick={onClose}>
             Cancelar
           </button>

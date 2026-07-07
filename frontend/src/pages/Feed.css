@@ -1682,6 +1682,7 @@
 
 }
 
+
 .side-action:hover {
   box-shadow: inset 0 0 5px 2px var(--green-500),
     0 0 5px 2px var(--green-500);
@@ -1689,8 +1690,8 @@
 
 
 .side-action.primary {
-  border-color: rgba(45, 35, 78, 0.2);
-  background: linear-gradient(135deg, #fff, #eaf8f6);
+  border-color: white;
+  background: rgb(59, 199, 187, 0.7)
 }
 
 @media (max-width: 1180px) {

@@ -20,11 +20,10 @@ app.get('/ping', (req, res) => {
 // GET /users
 app.get('/usuario', async (req, res) => {
   try {
-    // pool.query() executa SQL e retorna os resultados em rows
     const result = await pool.query(
-      ' select id, nome, email FROM usuario ORDER BY datacadastro DESC'
+      'SELECT id, nome FROM usuario ORDER BY "dataCadastro" DESC'
     )
-    res.json(result.rows)  // result.rows é o array de usuários
+    res.json(result.rows)
   } catch (err) {
     console.error(err)
     res.status(500).json({ erro: 'Erro ao buscar usuários' })
@@ -37,10 +36,8 @@ app.get('/usuario/:id', async (req, res) => {
   try {
     const { id } = req.params
 
-    // $1 é um placeholder — NUNCA concatene variáveis direto no SQL
-    // O pg substitui $1 pelo valor do array [id] com segurança
     const result = await pool.query(
-      'SELECT id, nome, email, idade, bio, pets , datacadastro FROM usuario WHERE id = $1',
+      'SELECT id, nome, email, idade, bio, "dataCadastro", "fotoPerfil" FROM usuario WHERE id = $1',
       [id]
     )
 
@@ -48,7 +45,7 @@ app.get('/usuario/:id', async (req, res) => {
       return res.status(404).json({ erro: 'Usuário não encontrado' })
     }
 
-    res.json(result.rows[0])  // [0] pega o primeiro (e único) resultado
+    res.json(result.rows[0])
   } catch (err) {
     console.error(err)
     res.status(500).json({ erro: 'Erro ao buscar usuário' })
@@ -95,7 +92,7 @@ app.post('/pets', async (req, res) => {
 // GET /posts  ou  GET /posts?page=2&limit=5
 app.get('/postagens', async (req, res) => {
   try {
-    const page  = Number(req.query.page)  || 1
+    const page = Number(req.query.page) || 1
     const limit = Number(req.query.limit) || 10
     const offset = (page - 1) * limit
 
@@ -160,7 +157,7 @@ app.post('/usuario', async (req, res) => {
 // POST /posts   body: { user_id, content }
 app.post('/postagens', autenticar, async (req, res) => {
   try {
-    
+
     const id_usuario = req.usuario.id
     const { descricao } = req.body
 

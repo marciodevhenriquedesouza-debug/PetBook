@@ -604,6 +604,8 @@ function Post({ post }) {
     }));
   }
   const [modalAberto, setModalAberto] = useState(null);
+  const [isSideActionActive, setIsSideActionActive] = useState(false);
+
   return (
     <article className="post-card">
       <section className="post-main">
@@ -646,11 +648,12 @@ function Post({ post }) {
             {post.badge && <span className="media-badge">{post.badge}</span>}
 
             <figcaption className="media-caption">
-              <button className="side-action primary" type="button">
-                <Icon name="share" />
-              </button>
-              <button className="side-action" type="button">
-                <Icon name="bookmark" />
+              <button
+                className={`side-action ${isSideActionActive ? "primary" : ""}`}
+                type="button"
+                onClick={() => setIsSideActionActive((current) => !current)}
+              >
+                <Icon name="star" />
               </button>
             </figcaption>
             {post.type === "video" && (

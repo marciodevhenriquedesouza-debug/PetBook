@@ -19,7 +19,7 @@ export default function CreateStoryModal({ isOpen, onClose, title }) {
         <footer className="modal-footer">
           <button className="addMidia-button">Mídia</button>
           <button className="addLocation-button">Localização</button>
-          <button className="cancel-button" onClick={onClose}>Cancelar</button>
+          <button className="cancelButton" onClick={onClose}>Cancelar</button>
           <button className="publish-button">Publicar</button>
         </footer>
 
